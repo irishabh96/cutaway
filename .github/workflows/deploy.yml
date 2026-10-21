@@ -24,6 +24,9 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run build:site
+        env:
+          GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
+          GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
@@ -7,6 +7,10 @@ import { pageHtml } from "../kit/iso-kit.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const DIST = join(ROOT, "dist");
+const SITE = "https://cutaway.phasr.sh";
+const ANALYTICS_ID = process.env.GA_MEASUREMENT_ID?.trim() || "";
+const SEARCH_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION?.trim() || "";
+if (ANALYTICS_ID && !/^G-[A-Z0-9]+$/.test(ANALYTICS_ID)) throw new Error(`GA_MEASUREMENT_ID should look like G-XXXXXXXXXX, got "${ANALYTICS_ID}"`);
 const catalog = JSON.parse(readFileSync(join(ROOT, "examples/catalog.json"), "utf8"));
 const docs = [
   ["getting-started", "Getting started"],
@@ -54,7 +58,7 @@ for (const item of catalog.filter((item) => item.react)) {
 
 function docPage(slug, title, content) {
   const nav = docs.map(([id, label]) => `<a href="../${id}/"${id === slug ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
-  return `<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${esc(title)} — Cutaway documentation"><title>${esc(title)} · Cutaway</title><link rel="icon" href="../../assets/mark.svg"><link rel="stylesheet" href="../../styles.css"><script type="module" src="../../app.mjs"></script></head><body><a class="skip" href="#content">Skip to content</a><header class="site-header wrap"><a class="brand" href="../../"><img src="../../assets/mark.svg" alt="" width="30" height="30">cutaway<span class="brand-version">DOCS</span></a><nav aria-label="Main navigation"><a href="../../#gallery">Gallery</a><a href="../../showcase/caddi-pitch/">Showcase</a><a href="https://github.com/irishabh96/cutaway">GitHub ↗</a><button class="theme-button" type="button" data-theme-toggle aria-label="Switch to dark theme">◐ <span>Dark</span></button></nav></header><div class="docs-layout wrap"><aside class="docs-sidebar"><p>THE FIELD GUIDE</p><nav aria-label="Documentation">${nav}</nav></aside><main id="content" class="docs-content">${content}</main></div><footer class="site-footer wrap"><a class="brand" href="../../">cutaway</a><p>See inside the systems you build.</p><div><a href="../../LICENSE">MIT license</a><a href="../../source/CONTRIBUTING.md">Contribute ↗</a></div><small>© 2026 Rishabh Bhatia</small></footer><div class="toast" data-toast role="status" aria-live="polite"></div></body></html>`;
+  return `<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${esc(title)} — Cutaway documentation"><meta property="og:title" content="${esc(title)} · Cutaway"><meta property="og:type" content="article"><meta property="og:site_name" content="Cutaway"><meta property="og:url" content="${SITE}/docs/${slug}/"><meta property="og:image" content="${SITE}/assets/social-preview.png"><meta name="twitter:card" content="summary_large_image"><title>${esc(title)} · Cutaway</title><link rel="icon" href="../../assets/mark.svg"><link rel="stylesheet" href="../../styles.css"><script type="module" src="../../app.mjs"></script></head><body><a class="skip" href="#content">Skip to content</a><header class="site-header wrap"><a class="brand" href="../../"><img src="../../assets/mark.svg" alt="" width="30" height="30">cutaway<span class="brand-version">DOCS</span></a><nav aria-label="Main navigation"><a href="../../#gallery">Gallery</a><a href="../../showcase/caddi-pitch/">Showcase</a><a href="https://github.com/irishabh96/cutaway">GitHub ↗</a><button class="theme-button" type="button" data-theme-toggle aria-label="Switch to dark theme">◐ <span>Dark</span></button></nav></header><div class="docs-layout wrap"><aside class="docs-sidebar"><p>THE FIELD GUIDE</p><nav aria-label="Documentation">${nav}</nav></aside><main id="content" class="docs-content">${content}</main></div><footer class="site-footer wrap"><a class="brand" href="../../">cutaway</a><p>See inside the systems you build.</p><div><a href="../../LICENSE">MIT license</a><a href="../../source/CONTRIBUTING.md">Contribute ↗</a></div><small>© 2026 Rishabh Bhatia</small></footer><div class="toast" data-toast role="status" aria-live="polite"></div></body></html>`;
 }
 
 for (const [slug, title] of docs) {
@@ -70,5 +74,26 @@ for (const [slug, title] of docs) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "index.html"), docPage(slug, title, html));
 }
-writeFileSync(join(DIST, "404.html"), `<!doctype html><html lang="en"><meta charset="utf-8"><title>Page not found · Cutaway</title><body><h1>This layer is missing.</h1><p>Return to <a href="https://cutaway.phasr.sh">Cutaway</a> or <a href="https://github.com/irishabh96/cutaway">the source repository</a>.</p></body></html>`);
+writeFileSync(join(DIST, "404.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Page not found · Cutaway</title></head><body><h1>This layer is missing.</h1><p>Return to <a href="${SITE}/">Cutaway</a> or <a href="https://github.com/irishabh96/cutaway">the source repository</a>.</p></body></html>`);
+
+// Search and analytics: canonical URLs, a sitemap, and Google tags when the deploy provides their IDs.
+cpSync(join(ROOT, ".github/assets/social-preview.png"), join(DIST, "assets/social-preview.png"));
+const pages = readdirSync(DIST, { recursive: true }).filter((path) => path.endsWith(".html") && !path.startsWith("source/")).sort();
+const urlOf = (path) => `${SITE}/${path.replace(/(^|\/)index\.html$/, "$1")}`;
+const canonicalOf = (path) => {
+  const light = path.replace(/([^/]+)\.html$/, "$1-light.html");
+  return urlOf(!path.endsWith("-light.html") && pages.includes(light) ? light : path);
+};
+const indexable = ["index.html", ...docs.map(([slug]) => `docs/${slug}/index.html`), "showcase/caddi-pitch/index.html", ...catalog.map((item) => `examples/${item.id}/${item.id}-light.html`)].filter((path) => pages.includes(path));
+for (const path of pages) {
+  const file = join(DIST, path);
+  const html = readFileSync(file, "utf8");
+  const tags = [path === "404.html" || html.includes('rel="canonical"') ? "" : `<link rel="canonical" href="${canonicalOf(path)}">`];
+  if (path === "index.html" && SEARCH_VERIFICATION) tags.push(`<meta name="google-site-verification" content="${esc(SEARCH_VERIFICATION)}">`);
+  if (ANALYTICS_ID) tags.push(`<script>if(window.top===window.self){window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config","${ANALYTICS_ID}");var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}";document.head.appendChild(s)}</script>`);
+  writeFileSync(file, html.replace("</head>", tags.join("") + "</head>"));
+}
+writeFileSync(join(DIST, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((path) => `  <url><loc>${urlOf(path)}</loc></url>`).join("\n")}\n</urlset>\n`);
+writeFileSync(join(DIST, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+console.log(`Search · ${indexable.length} pages in sitemap.xml · analytics ${ANALYTICS_ID ? ANALYTICS_ID : "off (set GA_MEASUREMENT_ID)"}`);
 console.log(`Cutaway · built ${catalog.length} studies and ${docs.length} documentation pages → ${resolve(DIST)}`);
