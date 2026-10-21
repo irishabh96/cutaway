@@ -1,0 +1,12 @@
+{
+  "multi-agent-orchestration": [{ "at": 0.3, "action": ["key", "ArrowRight"] }, { "at": 2.5, "action": ["move", ".lab-stage", 0.55, 0.5] }, { "at": 4.5, "action": ["key", "ArrowLeft"] }],
+  "raptor-engine": [{ "at": 0.3, "action": ["key", "i"] }, { "at": 3, "action": ["move", ".iso-plate", 0.6, 0.45] }],
+  "ripple-tank": [{ "at": 0.3, "action": ["move", ".iso-plate", 0.25, 0.5] }, { "at": 3, "action": ["move", ".iso-plate", 0.8, 0.5] }],
+  "turning-dial": [{ "at": 0.3, "action": ["key", "ArrowRight"] }, { "at": 2, "action": ["key", "ArrowRight"] }, { "at": 4, "action": ["key", "ArrowLeft"] }],
+  "dial-indicator": [{ "at": 0.3, "action": ["move", ".iso-plate", 0.2, 0.5] }, { "at": 3, "action": ["move", ".iso-plate", 0.8, 0.5] }],
+  "desk-computer": [{ "at": 0.3, "action": ["key", "c"] }, { "at": 0.8, "action": ["key", "u"] }, { "at": 1.3, "action": ["key", "t"] }, { "at": 1.8, "action": ["key", "a"] }, { "at": 2.3, "action": ["key", "w"] }, { "at": 2.8, "action": ["key", "a"] }, { "at": 3.3, "action": ["key", "y"] }],
+  "arcade-cabinet": [{ "at": 0.3, "action": ["key", "c"] }, { "at": 2.5, "action": ["key", "ArrowRight"] }],
+  "push-button": [{ "at": 0.3, "action": ["move", ".iso-plate", 0.5, 0.5] }, { "at": 2.5, "action": ["click", ".iso-plate", 0.5, 0.5] }],
+  "test-rig": [{ "at": 0.3, "action": ["move", ".iso-plate", 0.4, 0.5] }, { "at": 2.5, "action": ["key", "ArrowRight"] }],
+  "spot-plate": [{ "at": 0.3, "action": ["move", ".iso-plate", 0.2, 0.5] }, { "at": 3, "action": ["move", ".iso-plate", 0.8, 0.5] }]
+}

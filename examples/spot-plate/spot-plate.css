@@ -1,0 +1,46 @@
+/* Spot plate: six pairs of glass drops that run together as the feeler fan opens. */
+.ml {
+  --ml-plate: #1d1d1d;
+  --ml-floor: #151515;
+  --ml-wall: #0e0e0e;
+  --ml-glass: #242424;
+  --ml-joined: #2e2e2e;
+  --ml-blade: #1c1c1c;
+  --ml-blade-out: #282828;
+  border-radius: 10px;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+.iso[data-theme="light"] .ml {
+  --ml-plate: #ffffff;
+  --ml-floor: #eeeeeb;
+  --ml-wall: #e1e1de;
+  --ml-glass: #f8f8f6;
+  --ml-joined: #ffffff;
+  --ml-blade: #fbfbfa;
+  --ml-blade-out: #fefefd;
+}
+.ml:focus-visible { outline: 1px solid var(--cutaway-muted); outline-offset: 6px; }
+.ml .iso-svg { overflow: visible; }
+
+.ml-plate > .iso-top { fill: var(--ml-plate); }
+.ml-floor { fill: var(--ml-floor); stroke: none; }
+.ml-wall { fill: var(--ml-wall); stroke: none; }
+.ml-bottle > .iso-top,
+.ml-glass > .iso-top { fill: var(--ml-glass); }
+.ml-glass[data-joined] > .iso-top { fill: var(--ml-joined); }
+.ml-blade > .iso-top { fill: var(--ml-blade); }
+.ml-blade[data-out] > .iso-top { fill: var(--ml-blade-out); }
+.ml-blade[data-out] > .iso-edge { stroke: var(--cutaway-hi); }
+.ml-fan-halo { filter: blur(4px); opacity: 0.8; transform: translateY(1.5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ml, .ml * { transition: none !important; }
+}
+@media (max-width: 640px) {
+  .ml { overflow: hidden; }
+  .iso-plate .ml .iso-svg { width: 130%; max-width: none; margin: 0 -15%; }
+}

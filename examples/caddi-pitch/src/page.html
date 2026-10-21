@@ -1,0 +1,70 @@
+<canvas id="gl" role="img" aria-label="Isometric CNC hydraulic manifold assembly, animated through CADDi's four platform layers"></canvas>
+
+<div id="start" role="dialog" aria-modal="true" aria-labelledby="start-title">
+  <div class="start-card">
+    <div class="start-brand"><b>CADDi</b><span>THE AI DATA PLATFORM FOR MANUFACTURING</span></div>
+    <h1 id="start-title">CNC-MANIFOLD-V4 <span>/ LIVE PITCH</span></h1>
+    <ol class="start-stages">
+      <li><b>01</b> Data Layer · OCR &amp; ingest</li>
+      <li><b>02</b> Explorer · shape similarity</li>
+      <li><b>03</b> Semantic data map</li>
+      <li><b>04</b> Workflows &amp; QCD ROI</li>
+    </ol>
+    <button id="start-btn" type="button"><i aria-hidden="true"></i>INITIALIZE CADDi PITCH DECK</button>
+    <p class="start-note">Sound on recommended · <kbd>1</kbd>–<kbd>4</kbd> stages · <kbd>Space</kbd> loop / hold · <kbd>M</kbd> sound</p>
+    <p id="start-error" role="alert" hidden></p>
+  </div>
+</div>
+
+<div id="hud">
+  <div id="labels" aria-hidden="true"></div>
+  <div id="cards"></div>
+
+  <header id="topbar">
+    <div class="brand"><b>CADDi</b><span>PITCH · CD-2026-8841</span></div>
+    <nav id="stages" aria-label="Pitch stages"></nav>
+    <div class="toggles">
+      <button id="mode" type="button" aria-pressed="true"><span class="led" aria-hidden="true"></span><span class="txt">AUTO-LOOP</span><small>/ PRESENTER HOLD</small></button>
+      <button id="sound" type="button" aria-pressed="true"><canvas id="viz" width="72" height="18" aria-hidden="true"></canvas><span class="txt">SOUND: ON</span></button>
+    </div>
+  </header>
+
+  <section id="bom" aria-label="Bill of materials">
+    <header>BILL OF MATERIALS <span class="dim">· CNC-MANIFOLD-V4</span></header>
+    <table>
+      <thead><tr><th>#</th><th>DESCRIPTION</th><th>MATERIAL</th><th>QTY</th><th>UNIT</th></tr></thead>
+      <tbody id="bom-rows"></tbody>
+    </table>
+    <div class="telemetry">
+      <span>OCR <b id="t-scan">RAW</b></span>
+      <span>T <b id="t-time">0</b></span>
+      <span>FPS <b id="t-fps">60</b></span>
+      <span>DRAW <b id="t-draw">0</b></span>
+    </div>
+    <div class="hint">HOVER PARTS TO INSPECT · DRAG ORBIT · WHEEL ZOOM · DBL-CLICK ISO · [H] HUD</div>
+  </section>
+
+  <section id="titleblock" aria-label="Drawing title block">
+    <div class="tb-grid">
+      <div class="cell span2 big"><span class="k">ASSY</span>CNC-MANIFOLD-V4</div>
+      <div class="cell"><span class="k">DWG</span>CD-2026-8841</div>
+      <div class="cell"><span class="k">REV</span>D</div>
+      <div class="cell"><span class="k">MAT</span>SUS304</div>
+      <div class="cell"><span class="k">TOL</span>ISO 2768-m</div>
+      <div class="cell"><span class="k">SCALE</span>1:1</div>
+      <div class="cell"><span class="k">SHEET</span><span id="tb-sheet">1 / 4</span></div>
+      <div class="cell span4 stage"><span class="k">PITCH STAGE</span><span id="tb-stage" aria-live="polite">01 · DATA LAYER: OCR &amp; INGEST</span></div>
+      <div class="cell span4 roi"><span class="k">CADDi ROI</span><b id="roi-hrs">100,000</b> HRS SAVED <i>|</i> <b id="roi-cost">30%</b> COST REDUCTION</div>
+      <div class="cell"><span class="k">DRAWN</span>CADDi AI</div>
+      <div class="cell"><span class="k">DATE</span>2026-10-20</div>
+      <div class="cell"><span class="k">UNITS</span>mm</div>
+      <div class="cell proj"><span class="k">PROJ</span>
+        <svg viewBox="0 0 40 20" role="img" aria-label="first angle projection"><circle cx="9" cy="10" r="7"/><circle cx="9" cy="10" r="3"/><path d="M22 4 L38 1 L38 19 L22 16 Z"/><path d="M0 10 H40" stroke-dasharray="4 2 1 2"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <aside id="tooltip" aria-live="polite" hidden></aside>
+</div>
+
+

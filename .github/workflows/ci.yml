@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  examples:
+    name: Rebuild the examples
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install development tools
+        run: npm ci --no-audit --no-fund
+
+      - name: Regression tests
+        run: npm test
+
+      - name: Software flagships
+        run: |
+          node examples/multi-agent-orchestration/build.mjs
+          node examples/multi-agent-orchestration/build.mjs --light
+
+      - name: Dial indicator
+        run: |
+          node examples/dial-indicator/build.mjs
+          node examples/dial-indicator/build.mjs --light
+
+      - name: Desk computer
+        run: |
+          node examples/desk-computer/build.mjs
+          node examples/desk-computer/build.mjs --light
+
+      - name: Arcade cabinet
+        run: |
+          node examples/arcade-cabinet/build.mjs
+          node examples/arcade-cabinet/build.mjs --light
+
+      - name: Ripple tank
+        run: |
+          node examples/ripple-tank/build.mjs
+          node examples/ripple-tank/build.mjs --light
+
+      - name: Turning dial
+        run: |
+          node examples/turning-dial/build.mjs
+          node examples/turning-dial/build.mjs --light
+          node examples/turning-dial/build.mjs --light --verify
+          node examples/turning-dial/stress.mjs --light
+
+      - name: Raptor engine
+        run: |
+          node examples/raptor-engine/build.mjs
+          node examples/raptor-engine/build.mjs --light
+
+      - name: Push button
+        run: |
+          node examples/push-button/build.mjs
+          node examples/push-button/build.mjs --light
+
+      - name: CADDi live pitch
+        run: |
+          node examples/caddi-pitch/build.mjs
+          node examples/caddi-pitch/build.mjs --light
+
+      - name: Committed pages are unchanged
+        run: |
+          git status --short
+          git diff --stat --exit-code
+          test -z "$(git status --porcelain)"
+
+      - name: Build showcase and React previews
+        run: npm run build:site
+
+      - name: Browser verification
+        run: npm run verify
+
+      - name: Showcase interactions
+        run: npm run verify:site
+
+      - name: Recording smoke test
+        run: npm run record -- --example multi-agent-orchestration --seconds 1 --fps 60 --format all --out shots/recordings
+
+      - name: Upload visual checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cutaway-visual-checks
+          path: shots/
+          if-no-files-found: ignore
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: examples
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

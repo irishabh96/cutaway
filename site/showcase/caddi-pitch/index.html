@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CADDi live pitch: a procedural CNC hydraulic assembly walks through the Data Layer, Explorer, the Semantic Data Map and Workflow ROI. Three.js, GSAP, GLSL and Web Audio.">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta property="og:title" content="CADDi live pitch · Cutaway showcase">
+  <meta property="og:description" content="One CNC assembly, four platform layers, procedural sound. Open it, scrub it, hover the parts.">
+  <link rel="icon" href="../../assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+  <title>CADDi live pitch · Cutaway showcase</title>
+  <script type="module" src="../../app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="../../" aria-label="Cutaway home"><img src="../../assets/mark.svg" width="30" height="30" alt="">cutaway<span class="brand-version">SHOWCASE</span></a>
+    <nav aria-label="Main navigation"><a href="../../#gallery">Gallery</a><a href="../../docs/getting-started/">Documentation</a><a href="./" aria-current="page">Showcase</a><a class="github-nav" href="https://github.com/irishabh96/cutaway">GitHub ↗</a><button class="theme-button" data-theme-toggle type="button" aria-label="Switch to dark theme">◐ <span>Dark</span></button></nav>
+  </header>
+  <main id="main">
+    <section class="showcase-intro wrap" aria-labelledby="showcase-title">
+      <div>
+        <p class="eyebrow"><span class="status-dot"></span> SHOWCASE / 001 · THREE.JS · GSAP · GLSL · WEB AUDIO</p>
+        <h1 id="showcase-title">CADDi,<br>opened <em>up.</em></h1>
+      </div>
+      <div class="showcase-lede">
+        <p>A live pitch for <strong>CADDi, the AI data platform for manufacturing</strong>. One procedural CNC hydraulic valve and flange assembly carries the whole story: from a 2D drawing, through geometry similarity and the semantic data map, to workflow ROI.</p>
+        <div class="showcase-actions"><a class="button-primary" data-theme-link="caddi-pitch" href="../../examples/caddi-pitch/caddi-pitch-light.html" target="_blank" rel="noopener">Open full screen <span>↗</span></a><a class="text-link" href="https://github.com/irishabh96/cutaway/tree/main/examples/caddi-pitch">Read the source <span>→</span></a></div>
+      </div>
+    </section>
+
+    <section class="showcase-stage wrap" aria-label="Live demo">
+      <div class="hero-demo">
+        <div class="demo-heading"><span><span class="live-dot"></span> LIVE SPECIMEN · CNC-MANIFOLD-V4</span><span>CLICK INITIALIZE · SOUND ON</span></div>
+        <iframe class="showcase-frame" data-theme-frame="caddi-pitch" src="../../examples/caddi-pitch/caddi-pitch-light.html" title="CADDi live pitch. Click Initialize, then use 1 to 4, Space and M." loading="lazy" allow="fullscreen" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="demo-caption"><span>36 S LOOP · 4 STAGES · NO MODELS, IMAGES OR AUDIO FILES</span><a data-theme-link="caddi-pitch" href="../../examples/caddi-pitch/caddi-pitch-light.html" target="_blank" rel="noopener">Open full screen ↗</a></div>
+      </div>
+    </section>
+
+    <section class="process-section wrap" aria-labelledby="stages-title">
+      <div class="section-heading"><div><p class="eyebrow">FOUR LAYERS, ONE PART</p><h2 id="stages-title">From drawing<br>to decision.</h2></div><p>Each stage holds on a key frame for the presenter.<br>Jumping between them scrubs the timeline in either direction.</p></div>
+      <div class="process-grid showcase-grid">
+        <article><span class="step-number">01 / DATA LAYER</span><h3>OCR &amp; ingest.</h3><p>Six parts rise out of their own outlines on the blueprint as raw wireframe and point clouds. A cyan scan plane resolves them into CAD and reads <code>Ra 1.6</code>, <code>4x M6x1.0</code> and <code>SUS304</code> off the geometry. Then the assembly explodes into its bill of materials.</p><span class="process-foot">scan sweep · pneumatic snaps</span></article>
+        <article><span class="step-number">02 / EXPLORER</span><h3>Shape similarity.</h3><p>The flange housing splits down its axis: the new REV.D drawing in clay and BREP lines, the matched historical part under a cost and manufacturability heatmap. GD&amp;T dimensions and the match badge count up to 98.4% and a 34% saving.</p><span class="process-foot">micrometer ticks · Cmaj9 chime</span></article>
+        <article><span class="step-number">03 / SEMANTIC MAP</span><h3>Context, connected.</h3><p>Red threads run from a tapped M6 hole, the chamfered flange, the central bore and a deep pocket to Quote, Process Review, Design Review and Composer records, with data packets streaming along them.</p><span class="process-foot">sonar pings · stereo delay</span></article>
+        <article><span class="step-number">04 / WORKFLOWS</span><h3>QCD &amp; ROI.</h3><p>The heatmap spreads over the whole assembly while the Composer card runs Quality 99.4%, Cost −30% and a 10× faster cycle, and the title block counts to 100,000 hours saved. Then everything folds back into the drawing.</p><span class="process-foot">confirmation bell · fold-down</span></article>
+      </div>
+    </section>
+
+    <section class="docs-callout wrap" aria-labelledby="present-title">
+      <div><p class="eyebrow">BUILT FOR A LIVE ROOM</p><h2 id="present-title">Present it.<br>Don't narrate it.</h2><p>Sound cues fire only during real playback, so a stage jump is silent apart from a click. With reduced motion on, the deck starts on hold and jumps are instant.</p></div>
+      <dl class="showcase-keys">
+        <div><dt><kbd>1</kbd>–<kbd>4</kbd></dt><dd>Jump to a stage and hold</dd></div>
+        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Previous / next stage</dd></div>
+        <div><dt><kbd>Space</kbd></dt><dd>Auto-loop ↔ presenter hold</dd></div>
+        <div><dt><kbd>M</kbd></dt><dd>Sound on / off</dd></div>
+        <div><dt><kbd>H</kbd></dt><dd>Hide the HUD</dd></div>
+        <div><dt>Hover</dt><dd>Inspect a feature's tolerance, cost and supplier</dd></div>
+        <div><dt>Drag · wheel</dt><dd>Orbit and zoom; double-click returns to isometric</dd></div>
+      </dl>
+    </section>
+
+    <section class="process-section wrap" aria-labelledby="craft-title">
+      <div class="section-heading"><div><p class="eyebrow">HOW IT IS MADE</p><h2 id="craft-title">Everything is<br>generated.</h2></div><a class="text-link" href="https://github.com/irishabh96/cutaway/tree/main/examples/caddi-pitch/src">Browse the modules →</a></div>
+      <div class="process-grid">
+        <article><span class="step-number">GEOMETRY</span><h3>Real CAD, in code.</h3><p><code>ExtrudeGeometry</code> with <code>absarc</code> bolt patterns and radial slots, crease-preserving lathe solids for the housing, a 6206 bearing and threaded M6 bolts, sharp <code>EdgesGeometry</code> outlines. One feature table drives both the heatmap and hover inspection.</p></article>
+        <article><span class="step-number">SHADERS</span><h3>Drafted, not rendered.</h3><p>A patched <code>MeshStandardMaterial</code> adds the scan reveal, cost heatmap, clay preview and screen-space cross-hatching in shadow. Cast shadows print as hatching on the sheet, and the blueprint itself is a canvas drawing.</p></article>
+        <article><span class="step-number">SOUND</span><h3>Synthesised live.</h3><p>A Web Audio engine builds every sound from oscillators and noise: a detuned 60/120 Hz drone, a band-passed FM scan sweep, snaps, 5 ms micrometer clicks, FM bells and pings through a ping-pong delay, plus a spectrum in the presenter bar.</p></article>
+      </div>
+      <p class="showcase-note">Supplier names, costs, lot and part numbers are illustrative demo data. The platform figures (98.4%, −34%, 100,000 hours, 30%) come from the pitch brief.</p>
+    </section>
+  </main>
+  <footer class="site-footer wrap"><a class="brand" href="../../"><img src="../../assets/mark.svg" width="24" height="24" alt="">cutaway</a><p>Precision in the parts. Clarity in the whole.</p><div><a href="https://github.com/irishabh96/cutaway">GitHub ↗</a><a href="../../LICENSE">MIT license</a><a href="../../source/CONTRIBUTING.md">Contribute</a></div><small>© 2026 Rishabh Bhatia</small></footer>
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

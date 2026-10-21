@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive isometric cutaways of software, infrastructure, agents, and machines. One open-source skill for your coding agent.">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta property="og:title" content="Cutaway — See inside the systems you build.">
+  <meta property="og:description" content="Turn a technical idea into an interactive system you can open, inspect, and understand.">
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Cutaway — See inside the systems you build.</title>
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="./" aria-label="Cutaway home"><img src="assets/mark.svg" width="30" height="30" alt="">cutaway<span class="brand-version">v0.1</span></a>
+    <nav aria-label="Main navigation"><a href="#gallery">Gallery</a><a href="docs/getting-started/">Documentation</a><a href="showcase/caddi-pitch/">Showcase</a><a class="github-nav" href="https://github.com/irishabh96/cutaway">GitHub ↗</a><button class="theme-button" data-theme-toggle type="button" aria-label="Switch to dark theme">◐ <span>Dark</span></button></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> AN OPEN-SOURCE SKILL FOR CURIOUS MINDS</p>
+        <h1 id="hero-title">See inside<br>the systems<br>you <em>build.</em></h1>
+        <p class="hero-description">Turn a technical idea into something you can open, inspect, and understand. Interactive cutaways of software, agents, and machines. Built by your coding agent.</p>
+        <div class="install"><span aria-hidden="true">$</span><code>npx skills add irishabh96/cutaway -g</code><button data-copy="npx skills add irishabh96/cutaway -g" type="button" aria-label="Copy installation command">Copy ↗</button></div>
+        <p class="agent-line">Claude Code <span>·</span> Codex <span>·</span> OpenCode <span>·</span> Antigravity <span>·</span> MiniMax</p>
+        <a class="text-link" href="docs/getting-started/">Your first cutaway <span>→</span></a>
+      </div>
+      <div class="hero-demo">
+        <div class="demo-heading"><span><span class="live-dot"></span> LIVE SPECIMEN / 010</span><span>SVG · INTERACTIVE</span></div>
+        <iframe class="hero-frame" data-hero-frame src="examples/multi-agent-orchestration/multi-agent-orchestration-light.html?embed&amp;hero&amp;open=1" title="Interactive agent orchestration cutaway. Use its buttons, Space, or arrow keys." loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="demo-caption"><span>01 — MULTI-AGENT ORCHESTRATION</span><a href="examples/multi-agent-orchestration/multi-agent-orchestration-light.html" data-hero-link target="_blank" rel="noopener">Open full study ↗</a></div>
+      </div>
+    </section>
+    <section class="principle-strip wrap" aria-label="Project principles"><span>THE EXPLANATION IS IN THE INTERACTION.</span><span>SVG first</span><span>Both themes</span><span>Source included</span><span>MIT licensed ↗</span></section>
+    <section id="gallery" class="gallery-section wrap" aria-labelledby="gallery-title">
+      <div class="section-heading"><div><p class="eyebrow">THE FIELD COLLECTION</p><h2 id="gallery-title">Small worlds.<br>Useful understanding.</h2></div><p>Open a layer. Follow a request. Turn a dial.<br>Every study is a working model you can explore and take apart.</p></div>
+      <div class="gallery-toolbar"><div class="filters" role="group" aria-label="Filter by rendering mode"><button type="button" data-filter="All" aria-pressed="true">All studies <span>10</span></button><button type="button" data-filter="SVG" aria-pressed="false">SVG</button><button type="button" data-filter="SVG + WebGL" aria-pressed="false">SVG + WebGL</button><button type="button" data-filter="3D" aria-pressed="false">3D <small>BETA</small></button></div><span class="collection-label" data-count aria-live="polite">11 STUDIES</span></div>
+      <div class="gallery-grid" data-gallery></div>
+      <noscript><p>Open a study directly: <a href="examples/multi-agent-orchestration/multi-agent-orchestration-light.html">agent orchestration</a>, <a href="examples/raptor-engine/raptor-engine-light.html">Raptor test stand</a>, or <a href="examples/turning-dial/turning-dial-light.html">3D dial</a>. The documentation works without JavaScript.</p></noscript>
+    </section>
+    <section class="process-section wrap" aria-labelledby="process-title"><div class="section-heading"><div><p class="eyebrow">FROM PROMPT TO PERSPECTIVE</p><h2 id="process-title">One idea.<br>A way to see it.</h2></div><a class="text-link" href="docs/usage-and-prompts/">Explore the prompt cookbook →</a></div><div class="process-grid"><article><span class="step-number">01 / DESCRIBE</span><h3>Name the system.</h3><p>A consensus protocol. An agent pipeline. A mechanism. Tell your agent what readers should discover.</p><code>/cutaway explain how…</code></article><article><span class="step-number">02 / BUILD</span><h3>Make the model visible.</h3><p>Direct architecture or a physical metaphor, with accurate behavior, readable layers, and resolved connections.</p><span class="process-foot">SVG · SVG + WebGL · 3D beta</span></article><article><span class="step-number">03 / EXPLORE</span><h3>Understand by doing.</h3><p>Open the layers, change a parameter, and follow the consequences. Keep the source and make it yours.</p><span class="process-foot">HTML · SVG · React / Next.js</span></article></div></section>
+    <section class="docs-callout wrap"><div><p class="eyebrow">BUILT TO BE TAKEN APART</p><h2>Read the drawings.<br>Then read the code.</h2><p>Installation, camera math, craft rules, and fourteen prompt recipes. The kit is small enough to understand.</p></div><div class="doc-links"><a href="docs/getting-started/"><span>01</span> Get started <span>↗</span></a><a href="docs/usage-and-prompts/"><span>02</span> Usage & prompts <span>↗</span></a><a href="docs/architecture-and-kit/"><span>03</span> Architecture & kit <span>↗</span></a><a href="docs/video-walkthrough-script/"><span>04</span> Record a walkthrough <span>↗</span></a></div></section>
+    <section class="closing wrap"><p class="eyebrow">AN OPEN INVITATION</p><h2>What will you<br><em>open up?</em></h2><a class="button-primary" href="docs/getting-started/">Build your first cutaway <span>↗</span></a></section>
+  </main>
+  <footer class="site-footer wrap"><a class="brand" href="./"><img src="assets/mark.svg" width="24" height="24" alt="">cutaway</a><p>Precision in the parts. Clarity in the whole.</p><div><a href="https://github.com/irishabh96/cutaway">GitHub ↗</a><a href="LICENSE">MIT license</a><a href="source/CONTRIBUTING.md">Contribute</a></div><small>© 2026 Rishabh Bhatia</small></footer>
+  <dialog data-source-dialog aria-labelledby="source-title"><div class="dialog-top"><h2 id="source-title">Study source</h2><button type="button" data-close-dialog aria-label="Close source viewer">Close ×</button></div><div class="source-tabs" role="group" aria-label="Study details"><button type="button" data-source-tab="prompt" aria-pressed="true">Prompt</button><button type="button" data-source-tab="source" aria-pressed="false">Build source</button><button type="button" data-source-tab="html" aria-pressed="false">Generated HTML</button></div><p data-provenance></p><pre><code data-source-content></code></pre><a data-source-link href="#" target="_blank" rel="noopener">Open source file ↗</a></dialog>
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

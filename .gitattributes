@@ -1,0 +1,8 @@
+* text=auto eol=lf
+examples/**/*.html linguist-generated=true
+*.webp binary
+*.png binary
+*.mp4 binary
+*.webm binary
+*.gif binary
+examples/**/*.svg linguist-generated=true

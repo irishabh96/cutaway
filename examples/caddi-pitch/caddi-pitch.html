@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CADDi live pitch: a procedural CNC assembly walks through the Data Layer, Explorer, the Semantic Data Map and Workflow ROI, with Web Audio sound design.">
+<link rel="icon" href="data:,">
+<title>CADDi live pitch · Cutaway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>:root{--paper: #f4f6f9;--ink: #0f172a;--slate: #475569;--emerald-ink: #047857;--amber-ink: #b45309;--line: color-mix(in srgb, var(--ink) 18%, transparent);--panel: #ffffff;--red: #e60012;--red-hot: #ff2a2a;--blue: #0052ff;--amber: #f59e0b;--emerald: #10b981;--cyan: #22d3ee;--mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;color-scheme:light}:root[data-theme=dark]{--paper: #0b1220;--ink: #e2e8f0;--slate: #94a3b8;--emerald-ink: #34d399;--amber-ink: #fbbf24;--red: #ff3b4a;--red-hot: #ff5a64;--blue: #5b8cff;--amber: #fbbf24;--emerald: #34d399;--panel: #111b2e;color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased}#gl{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:crosshair;touch-action:none}.dim{color:var(--slate)}button{font:inherit;color:inherit;cursor:pointer}#hud{position:fixed;inset:0;pointer-events:none;font-size:9px;line-height:1.45;letter-spacing:.02em}#hud.hidden>*:not(#tooltip){visibility:hidden}#labels,#cards{position:absolute;inset:0}#topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);background:linear-gradient(color-mix(in srgb,var(--paper) 97%,transparent),color-mix(in srgb,var(--paper) 85%,transparent));pointer-events:auto}.brand{display:flex;align-items:baseline;gap:8px;white-space:nowrap}.brand b{background:var(--red);color:#fff;padding:1px 6px;font-size:11px;letter-spacing:.04em}.brand span{color:var(--slate);font-size:8px}#stages{display:flex;align-items:stretch;gap:4px;flex:1 1 auto;min-width:0;justify-content:center}#stages button,.toggles button{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;border:1px solid var(--line);background:var(--panel);padding:5px 9px 6px;font-size:9px;font-weight:600;letter-spacing:.03em;white-space:nowrap;transition:border-color .2s,background .2s,color .2s}#stages button:hover,.toggles button:hover{border-color:var(--ink)}kbd{display:inline-grid;place-items:center;min-width:15px;height:15px;padding:0 3px;border:1px solid currentColor;border-bottom-width:2px;font:700 8px var(--mono)}#stages button i{position:absolute;left:-1px;right:-1px;bottom:-1px;height:2px}#stages button em{display:block;height:100%;width:0;background:var(--red)}#stages button.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}#stages button.done{color:var(--slate)}#stages button:focus-visible,.toggles button:focus-visible,#start-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.toggles{display:flex;gap:4px}#mode .led{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 3px #10b98133}#mode small{color:var(--slate);font-size:8px;font-weight:500}#mode.hold .led{background:var(--amber);box-shadow:0 0 0 3px #f59e0b40}#mode.hold{border-color:var(--ink)}#viz{width:72px;height:18px}#sound.off{color:var(--slate)}#sound.off #viz{opacity:.35}#bom{position:absolute;left:16px;bottom:14px;width:400px;border:1px solid var(--ink);background:color-mix(in srgb,var(--panel) 90%,transparent)}#bom header{font-size:8px;font-weight:700;letter-spacing:.06em}#bom header{padding:5px 8px;border-bottom:1px solid var(--ink)}#bom table{width:100%;border-collapse:collapse}#bom th,#bom td{padding:2px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}#bom th{font-size:8px;color:var(--slate)}#bom td:first-child{font-weight:700}#bom tr.hot td{background:#e6001214;color:var(--red)}.telemetry{display:flex;gap:12px;padding:4px 8px;border-bottom:1px solid var(--line)}.telemetry span{color:var(--slate)}.telemetry b{color:var(--ink)}.hint{padding:4px 8px;color:var(--slate);font-size:8px}#titleblock{position:absolute;right:16px;bottom:14px;width:400px;border:2px solid var(--ink);background:var(--ink)}.tb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}.tb-grid .cell{background:var(--panel);padding:3px 6px 4px;font-size:9.5px;font-weight:600;min-height:30px}.tb-grid .span2{grid-column:span 2}.tb-grid .span4{grid-column:span 4}.tb-grid .big{font-size:11px;font-weight:700}.tb-grid .k{display:block;color:var(--slate);font-size:8px;font-weight:700;letter-spacing:.06em}.tb-grid .stage{color:var(--red)}.tb-grid .roi{font-size:10.5px}.tb-grid .roi b{color:var(--emerald-ink);font-size:12px}.tb-grid .roi i{color:var(--slate);font-style:normal;padding:0 4px}.tb-grid .proj svg{width:40px;height:14px;fill:none;stroke:var(--ink);stroke-width:1.2}#tooltip{position:absolute;left:0;top:0;width:270px;border:1px solid var(--ink);background:color-mix(in srgb,var(--panel) 96%,transparent);box-shadow:4px 4px color-mix(in srgb,var(--ink) 90%,transparent)}#tooltip[hidden]{display:none}#tooltip header{padding:5px 8px;background:var(--ink);color:var(--paper);font-weight:700}#tooltip header i,.label.balloon .txt i{display:inline-grid;place-items:center;width:15px;height:15px;margin-right:6px;border:1px solid currentColor;border-radius:50%;font-style:normal;font-size:8px}#tooltip .row,.card .row{display:flex;justify-content:space-between;gap:10px;padding:2px 8px;border-bottom:1px solid var(--line)}#tooltip .row span,.card .row span{color:var(--slate)}#tooltip .row b{text-align:right}#tooltip .feat b{color:var(--blue)}b.r{color:var(--red)}b.a{color:var(--amber-ink)}b.g{color:var(--emerald-ink)}.label{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform;opacity:0;transition:opacity .25s}.label .pin{position:absolute;left:-2px;top:-2px;width:4px;height:4px;background:var(--ink)}.label .lead{position:absolute;left:0;top:0;width:20px;border-top:1px solid var(--ink);transform-origin:0 0;transform:rotate(-35deg)}.label .txt{position:absolute;left:17px;top:-22px;padding:1px 4px;background:color-mix(in srgb,var(--paper) 90%,transparent)}.label.left .lead{left:auto;right:0;transform-origin:100% 0;transform:rotate(35deg)}.label.left .txt{left:auto;right:17px}.label.center .lead,.label.center .pin{display:none}.label.center .txt{left:0;top:0;transform:translate(-50%,-50%)}.label.ocr .pin{background:var(--blue)}.label.ocr .lead{border-color:var(--blue)}.label.ocr .txt{background:transparent;padding:0}.ocr-box{display:inline-block;padding:2px 5px;border:1px dashed var(--blue);background:#22d3ee1f;color:var(--blue);font-weight:700;font-size:10px}.conf{display:block;color:var(--slate);font-size:8px}.label.balloon .txt{border:1px solid var(--ink);background:var(--panel);padding:3px 6px}.label.balloon .txt i{color:var(--red);border-width:1.5px}.label.dimension .txt{font-weight:700;font-size:10px;background:var(--paper);padding:0 4px}.label.gdt .txt{top:0;border:1px solid var(--ink);background:var(--panel);padding:3px 7px;font-size:10px;text-align:center}.label.gdt small{display:block;font-size:8px;color:var(--slate)}.fcf{display:inline-flex;margin-left:6px;border:1px solid var(--ink);vertical-align:-2px}.fcf i{font-style:normal;padding:0 4px;border-left:1px solid var(--ink)}.fcf i:first-child{border-left:0}.label.badge .txt{display:flex;gap:0;border:1px solid var(--ink);background:var(--panel);padding:0;font-size:9.5px;box-shadow:4px 4px 0 var(--ink)}.label.badge .txt span{padding:4px 8px;border-left:1px solid var(--line)}.label.badge .txt span:first-child{border-left:0;background:var(--ink);color:var(--paper)}.label.half-tag .txt{border-left:2px solid var(--ink)}b.b{color:var(--blue)}.legend{display:flex;align-items:center;gap:4px;margin-top:2px;color:var(--slate)}.legend i{display:inline-block;width:70px;height:5px;background:linear-gradient(90deg,#1a5cf2,#22d3ee,#f59e0b,#e60012)}.label.datum .lead{display:none}.label.datum .txt{left:-10px;top:6px;padding:0;background:none}.label.datum .txt i{display:inline-grid;place-items:center;width:16px;height:16px;border:1.5px solid var(--ink);background:var(--panel);font-style:normal;font-weight:700}.card{position:absolute;left:0;top:0;width:270px;opacity:0;will-change:transform,opacity;--side: 14px;font-size:9px}.card>*{position:relative}.card.right header,.card.right .row,.card.right .qcd-body{left:var(--side)}.card.left header,.card.left .row,.card.left .qcd-body{left:calc(-270px - var(--side))}.card header,.card .row,.card .qcd-body{transform:scale(var(--pop, 1));background:var(--panel);border-left:1px solid var(--ink);border-right:1px solid var(--ink)}.card header{top:-12px;padding:4px 8px;border:1px solid var(--ink);border-top:3px solid var(--accent);font-weight:700;letter-spacing:.03em}.card .row{top:-12px}.card .row b{text-align:right;white-space:normal}.card .row:last-child,.card .qcd-body{border-bottom:1px solid var(--ink)}.card .pin{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border:2px solid var(--red-hot);border-radius:50%;background:var(--panel)}.card.alert header{background:var(--red);color:#fff}.card.alert .row b{color:var(--red)}.card.alert .pin{animation:ping 1s ease-out infinite}@keyframes ping{50%{box-shadow:0 0 0 6px #ff2a2a40}}.card.dimmed{filter:grayscale(1)}.card.dimmed>*{opacity:.72}.card.focus header{background:var(--blue);color:#fff}.qcd-body{top:-12px;display:flex;gap:8px;padding:6px 8px}.radar{width:78px;height:78px;flex:none;overflow:visible}.radar .grid{fill:none;stroke:var(--line)}.radar line{stroke:var(--line)}.radar .val{fill:#0052ff2e;stroke:var(--blue);stroke-width:1.5}.radar text{font-size:8px;font-family:var(--mono);text-anchor:middle;fill:var(--ink);font-weight:700}.bars{flex:1;display:grid;gap:6px;align-content:center}.bars div{display:grid;grid-template-columns:48px 1fr 44px;align-items:center;gap:6px}.bars span{color:var(--slate)}.bars i{height:5px;background:var(--line)}.bars em{display:block;height:100%;width:0;background:var(--emerald)}.bars b{text-align:right;color:var(--emerald-ink)}@media(max-width:900px){#topbar{flex-wrap:wrap;gap:8px}#stages{order:3;flex-basis:100%;justify-content:flex-start;overflow-x:auto}#stages .arrow,#bom,#bom table,.hint{display:none}#titleblock{left:16px;width:auto}#cards{display:flex;flex-direction:column;gap:6px;padding:170px 16px 0}.card{position:relative;width:auto;font-size:8px;transform:none!important}.card .pin{display:none}.card.left header,.card.left .row,.card.left .qcd-body,.card.right header,.card.right .row,.card.right .qcd-body{left:0;top:0}.card .row,.card:not(.focus) .qcd-body{display:none}.radar{width:52px;height:52px}.label.badge .txt{flex-direction:column}}@media(max-width:1500px){#topbar{flex-wrap:wrap;row-gap:8px}.toggles{margin-left:auto}#stages{order:3;flex-basis:100%;justify-content:flex-start;overflow-x:auto;padding:3px 2px}}#start{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--paper) 72%,transparent);backdrop-filter:blur(6px) saturate(.8)}.start-card{width:min(520px,100%);border:2px solid var(--ink);background:var(--panel);box-shadow:8px 8px 0 var(--ink);padding:22px 24px 18px;font-size:10px}.start-brand{display:flex;align-items:baseline;gap:8px}.start-brand b{background:var(--red);color:#fff;padding:2px 7px;font-size:13px}.start-brand span{color:var(--slate);font-size:9px;letter-spacing:.06em}.start-card h1{margin:16px 0 10px;font-size:20px;letter-spacing:.02em}.start-card h1 span{color:var(--slate);font-weight:500}.start-stages{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}.start-stages b{color:var(--red);margin-right:6px}#start-btn{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;letter-spacing:.08em;overflow:hidden;transition:background .2s}#start-btn i{width:9px;height:9px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 4px #10b98140}#start-btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(34,211,238,.35) 50%,transparent 70%);transform:translate(-100%);animation:sheen 2.4s ease-in-out infinite}#start-btn:hover{background:var(--red);border-color:var(--red)}#start-btn:disabled{cursor:wait;opacity:.6}@keyframes sheen{60%,to{transform:translate(100%)}}.start-note{margin:12px 0 0;color:var(--slate)}.start-note kbd{color:var(--ink)}#start-error{margin:10px 0 0;color:var(--red);font-weight:700}body:not(.started) #hud{visibility:hidden}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="gl" role="img" aria-label="Isometric CNC hydraulic manifold assembly, animated through CADDi's four platform layers"></canvas>
+
+<div id="start" role="dialog" aria-modal="true" aria-labelledby="start-title">
+  <div class="start-card">
+    <div class="start-brand"><b>CADDi</b><span>THE AI DATA PLATFORM FOR MANUFACTURING</span></div>
+    <h1 id="start-title">CNC-MANIFOLD-V4 <span>/ LIVE PITCH</span></h1>
+    <ol class="start-stages">
+      <li><b>01</b> Data Layer · OCR &amp; ingest</li>
+      <li><b>02</b> Explorer · shape similarity</li>
+      <li><b>03</b> Semantic data map</li>
+      <li><b>04</b> Workflows &amp; QCD ROI</li>
+    </ol>
+    <button id="start-btn" type="button"><i aria-hidden="true"></i>INITIALIZE CADDi PITCH DECK</button>
+    <p class="start-note">Sound on recommended · <kbd>1</kbd>–<kbd>4</kbd> stages · <kbd>Space</kbd> loop / hold · <kbd>M</kbd> sound</p>
+    <p id="start-error" role="alert" hidden></p>
+  </div>
+</div>
+
+<div id="hud">
+  <div id="labels" aria-hidden="true"></div>
+  <div id="cards"></div>
+
+  <header id="topbar">
+    <div class="brand"><b>CADDi</b><span>PITCH · CD-2026-8841</span></div>
+    <nav id="stages" aria-label="Pitch stages"></nav>
+    <div class="toggles">
+      <button id="mode" type="button" aria-pressed="true"><span class="led" aria-hidden="true"></span><span class="txt">AUTO-LOOP</span><small>/ PRESENTER HOLD</small></button>
+      <button id="sound" type="button" aria-pressed="true"><canvas id="viz" width="72" height="18" aria-hidden="true"></canvas><span class="txt">SOUND: ON</span></button>
+    </div>
+  </header>
+
+  <section id="bom" aria-label="Bill of materials">
+    <header>BILL OF MATERIALS <span class="dim">· CNC-MANIFOLD-V4</span></header>
+    <table>
+      <thead><tr><th>#</th><th>DESCRIPTION</th><th>MATERIAL</th><th>QTY</th><th>UNIT</th></tr></thead>
+      <tbody id="bom-rows"></tbody>
+    </table>
+    <div class="telemetry">
+      <span>OCR <b id="t-scan">RAW</b></span>
+      <span>T <b id="t-time">0</b></span>
+      <span>FPS <b id="t-fps">60</b></span>
+      <span>DRAW <b id="t-draw">0</b></span>
+    </div>
+    <div class="hint">HOVER PARTS TO INSPECT · DRAG ORBIT · WHEEL ZOOM · DBL-CLICK ISO · [H] HUD</div>
+  </section>
+
+  <section id="titleblock" aria-label="Drawing title block">
+    <div class="tb-grid">
+      <div class="cell span2 big"><span class="k">ASSY</span>CNC-MANIFOLD-V4</div>
+      <div class="cell"><span class="k">DWG</span>CD-2026-8841</div>
+      <div class="cell"><span class="k">REV</span>D</div>
+      <div class="cell"><span class="k">MAT</span>SUS304</div>
+      <div class="cell"><span class="k">TOL</span>ISO 2768-m</div>
+      <div class="cell"><span class="k">SCALE</span>1:1</div>
+      <div class="cell"><span class="k">SHEET</span><span id="tb-sheet">1 / 4</span></div>
+      <div class="cell span4 stage"><span class="k">PITCH STAGE</span><span id="tb-stage" aria-live="polite">01 · DATA LAYER: OCR &amp; INGEST</span></div>
+      <div class="cell span4 roi"><span class="k">CADDi ROI</span><b id="roi-hrs">100,000</b> HRS SAVED <i>|</i> <b id="roi-cost">30%</b> COST REDUCTION</div>
+      <div class="cell"><span class="k">DRAWN</span>CADDi AI</div>
+      <div class="cell"><span class="k">DATE</span>2026-10-20</div>
+      <div class="cell"><span class="k">UNITS</span>mm</div>
+      <div class="cell proj"><span class="k">PROJ</span>
+        <svg viewBox="0 0 40 20" role="img" aria-label="first angle projection"><circle cx="9" cy="10" r="7"/><circle cx="9" cy="10" r="3"/><path d="M22 4 L38 1 L38 19 L22 16 Z"/><path d="M0 10 H40" stroke-dasharray="4 2 1 2"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <aside id="tooltip" aria-live="polite" hidden></aside>
+</div>
+
+
+<script type="module" src="caddi-pitch.js"></script>
+</body>
+</html>

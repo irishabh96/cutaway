@@ -1,0 +1,11 @@
+.td-stage{touch-action:pan-y;cursor:grab;outline:none;border-radius:8px}
+.td-stage:focus-visible{outline:1px solid var(--cutaway-muted);outline-offset:5px}
+.td-stage[data-drag]{cursor:grabbing}
+.td-gl{display:block}
+.td-led{--td-green:#1f9d55;--td-pale:#eafff1}
+.iso[data-theme="dark"] .td-led{--td-green:#3ddc84}
+.td-led-halo{fill:var(--td-green);fill-opacity:.22}
+.td-led-body{fill:var(--td-green)}
+.td-led-core{fill:var(--td-pale)}
+.td-stage[data-gl] .td-led{opacity:var(--td-fallback,0)}
+.td-digit{fill:none;stroke:var(--cutaway-hi);stroke-linecap:round;stroke-linejoin:round}

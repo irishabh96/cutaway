@@ -1,0 +1,160 @@
+/* Raptor 2 test stand. Every colour is a token on .rp, with the light set overriding it. */
+.rp {
+  --rp-blend: screen;
+  --rp-button: color-mix(in srgb, var(--cutaway-text) 12%, transparent);
+  --rp-button-hover: color-mix(in srgb, var(--cutaway-text) 22%, transparent);
+  --rp-button-ring: var(--cutaway-mid);
+  --rp-chip-ring: color-mix(in srgb, var(--cutaway-mid) 70%, transparent);
+  --rp-chip-hover: color-mix(in srgb, var(--cutaway-text) 14%, transparent);
+  --rp-lamp-off: #4a4a4a;
+  --rp-lamp-on: #ff8a3d;
+  --rp-lamp-armed: #f2c14e;
+  --rp-lamp-glow: rgba(255, 138, 61, 0.65);
+  --rp-rim: #ffb27a;
+  --rp-rim-soft: #ff7b3a;
+  --rp-rim-share: 0.7;
+  --rp-flash-0: rgba(255, 255, 255, 1);
+  --rp-flash-1: rgba(214, 206, 255, 0.75);
+  --rp-flash-2: rgba(150, 132, 255, 0.28);
+  --rp-flash-3: rgba(150, 132, 255, 0);
+  --rp-deck-0: rgba(255, 170, 110, 0.85);
+  --rp-deck-1: rgba(214, 120, 70, 0.45);
+  --rp-deck-2: rgba(140, 80, 60, 0.16);
+  --rp-deck-3: rgba(120, 70, 50, 0);
+  --rp-deck-share: 0.85;
+}
+[data-theme="light"] .rp {
+  --rp-blend: normal;
+  --rp-lamp-off: #c4c4c8;
+  --rp-lamp-on: #f06a1c;
+  --rp-lamp-armed: #d99a12;
+  --rp-lamp-glow: rgba(240, 106, 28, 0.45);
+  --rp-rim: #e2621b;
+  --rp-rim-soft: #f3a06a;
+  --rp-rim-share: 0.5;
+  --rp-flash-0: rgba(255, 255, 255, 0.9);
+  --rp-flash-1: rgba(236, 232, 255, 0.6);
+  --rp-flash-2: rgba(200, 190, 255, 0.2);
+  --rp-flash-3: rgba(200, 190, 255, 0);
+  --rp-deck-0: rgba(240, 120, 50, 0.5);
+  --rp-deck-1: rgba(236, 150, 90, 0.3);
+  --rp-deck-2: rgba(236, 180, 140, 0.12);
+  --rp-deck-3: rgba(236, 180, 140, 0);
+  --rp-deck-share: 0.45;
+}
+
+.rp .iso-plate { padding: 56px 28px 76px; overflow: hidden; }
+.rp-stage {
+  position: relative;
+  border-radius: 6px;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.rp-stage:focus { outline: none; }
+.rp-stage:focus-visible { outline: 1px solid var(--cutaway-muted); outline-offset: 6px; }
+.rp-stage > svg, .rp-stage > canvas, .rp-stage > div { display: block; width: 100%; height: auto; }
+.rp-stage > .rp-front, .rp-stage > .rp-plume, .rp-stage > .rp-glow, .rp-stage > .rp-veil, .rp-stage > .rp-flash {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+}
+.rp-plume, .rp-glow, .rp-veil, .rp-flash { pointer-events: none; }
+.rp-plume, .rp-glow, .rp-veil { mix-blend-mode: var(--rp-blend); }
+.rp-front { pointer-events: none; overflow: visible; }
+.rp-front .it { pointer-events: visiblePainted; }
+.rp-glow { overflow: visible; }
+.rp-flash {
+  opacity: 0;
+  mix-blend-mode: var(--rp-blend);
+  background: radial-gradient(circle closest-side at var(--gx, 50%) var(--gy, 60%), var(--rp-flash-0), var(--rp-flash-1) 30%, var(--rp-flash-2) 62%, var(--rp-flash-3));
+}
+.rp-rim { fill: none; stroke: var(--rp-rim); stroke-width: 1.4; stroke-linecap: round; opacity: var(--rim, 0); pointer-events: none; }
+.iso-svg .rp-rim.rp-rim-soft { stroke: var(--rp-rim-soft); stroke-width: 5; filter: blur(2.5px); opacity: calc(var(--rim, 0) * var(--rp-rim-share)); }
+.rp-deckglow { opacity: calc(var(--deck-glow, 0) * var(--rp-deck-share)); mix-blend-mode: var(--rp-blend); pointer-events: none; }
+.rp-stop-0 { stop-color: var(--rp-deck-0); }
+.rp-stop-1 { stop-color: var(--rp-deck-1); }
+.rp-stop-2 { stop-color: var(--rp-deck-2); }
+.rp-stop-3 { stop-color: var(--rp-deck-3); }
+.rp-void { fill: var(--cutaway-shade-0); stroke: none; }
+.rp-shadow { fill: var(--cutaway-halo); opacity: calc(var(--cutaway-halo-opacity) * 0.6); filter: blur(6px); }
+
+/* focus: everything not chosen steps down a tone; the chosen assembly takes the lit accent */
+.rp-stage[data-focus] .it:not([data-on]):not([data-piece="stand"]) { --cutaway-hi: var(--cutaway-mid); --cutaway-mid: var(--cutaway-lo); }
+.rp-stage[data-focus] .it[data-piece="stand"] { --cutaway-mid: var(--cutaway-lo); }
+.rp .it[data-on] { --cutaway-hi: var(--cutaway-lit); --cutaway-mid: var(--cutaway-hi); }
+.rp .it[data-on] .iso-top, .rp .it[data-on] .tb-shine { fill: var(--cutaway-lit-top); }
+.rp .it[data-on] .iso-shade, .rp .it[data-on] .tb-body { fill: var(--cutaway-lit-shade); }
+.rp .it[data-on] .iso-solid[data-seamless] > .iso-shade { stroke: var(--cutaway-lit-shade); }
+.rp .it[data-on] .iso-solid[data-seamless] > .iso-top { stroke: var(--cutaway-lit-top); }
+.rp .it .iso-line, .rp .it .iso-shade, .rp .it .iso-top, .rp .it .tb-body { transition: stroke 0.25s var(--cutaway-ease), fill 0.25s var(--cutaway-ease); }
+
+/* controls */
+.rp-controls {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--cutaway-muted);
+  font: 10.5px/1 var(--cutaway-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.rp-fire {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--rp-button);
+  box-shadow: inset 0 0 0 1px var(--rp-button-ring);
+  color: var(--cutaway-strong);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s var(--cutaway-ease), transform 0.12s var(--cutaway-ease);
+}
+.rp-fire:hover { background: var(--rp-button-hover); }
+.rp-fire:active { transform: scale(0.97); }
+.rp-fire:focus-visible { outline: 1px solid var(--cutaway-muted); outline-offset: 3px; }
+.rp-lamp { width: 7px; height: 7px; border-radius: 50%; background: var(--rp-lamp-off); transition: background-color 0.3s var(--cutaway-ease), box-shadow 0.3s var(--cutaway-ease); }
+.rp-fire[data-state="on"] .rp-lamp { background: var(--rp-lamp-on); box-shadow: 0 0 0 3px color-mix(in srgb, var(--rp-lamp-on) 22%, transparent), 0 0 10px var(--rp-lamp-glow); }
+.rp-fire[data-state="armed"] .rp-lamp { background: var(--rp-lamp-armed); box-shadow: 0 0 0 3px color-mix(in srgb, var(--rp-lamp-armed) 20%, transparent); }
+.rp-hint { white-space: nowrap; }
+.rp-live { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* parts list */
+.rp-parts { display: flex; flex-wrap: wrap; gap: 6px; }
+.rp-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--rp-chip-ring);
+  color: var(--cutaway-muted);
+  font: 12px/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: color 0.2s var(--cutaway-ease), background-color 0.2s var(--cutaway-ease);
+}
+.rp-part:hover, .rp-part:focus-visible, .rp-part[data-on] { color: var(--cutaway-strong); background: var(--rp-chip-hover); outline: none; }
+.rp-part[data-on] { box-shadow: inset 0 0 0 1px var(--cutaway-hi); }
+.rp-num { font: 9.5px/1 var(--cutaway-mono); letter-spacing: 0.04em; opacity: 0.75; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 640px) {
+  .rp .iso-plate { padding: 48px 12px 92px; }
+  .rp .iso-plate-corner[data-corner="readout"] { right: 0; bottom: 34px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .rp-controls { left: 12px; right: 12px; bottom: 14px; flex-wrap: wrap; gap: 8px 12px; }
+  .rp-hint { font-size: 9.5px; }
+  .rp-stage[data-focus] ~ .rp-controls .rp-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rp *, .rp *::before, .rp *::after { transition: none !important; }
+}

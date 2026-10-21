@@ -1,0 +1,35 @@
+/* Test rig: a glass button on a sprung carriage, a finger probe and a dial gauge. */
+.ms {
+  --ms-glass: #232323;
+  --ms-glass-lit: #2c2c2c;
+  border-radius: 10px;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+.iso[data-theme="light"] .ms {
+  --ms-glass: #f9f9f7;
+  --ms-glass-lit: #ffffff;
+}
+.ms[data-held] { cursor: grabbing; }
+.ms:focus-visible { outline: 1px solid var(--cutaway-muted); outline-offset: 6px; }
+.ms .iso-svg { overflow: visible; }
+
+.ms-glass > .iso-top { fill: var(--ms-glass); }
+.ms-glass[data-lit] > .iso-top { fill: var(--ms-glass-lit); }
+.ms-glass[data-lit] > .iso-edge { stroke: var(--cutaway-lit); }
+.ms-shine { stroke-linecap: round; opacity: 0.55; }
+.ms-shadow { filter: blur(4px); opacity: 0.8; transform: translateY(1px); }
+.ms-coil { stroke-linejoin: round; }
+.ms-needle { fill: var(--cutaway-lit-top); }
+.ms-pull .iso-wire-end { transition: opacity 160ms var(--cutaway-ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ms, .ms * { transition: none !important; }
+}
+@media (max-width: 640px) {
+  .ms { overflow: hidden; }
+  .iso-plate .ms .iso-svg { width: 118%; max-width: none; margin: 0 -9%; }
+}

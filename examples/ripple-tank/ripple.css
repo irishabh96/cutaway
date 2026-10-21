@@ -1,0 +1,24 @@
+.rt{--rt-sheet:#101010;--rt-tape:#1d1d1c;--rt-lamp:0}
+.iso[data-theme="light"] .rt,.rt[data-theme="light"]{--rt-sheet:#ffffff;--rt-tape:#f3eee2}
+.rt .iso-plate{overflow:hidden}
+.rt-sheet>.iso-fill{fill:var(--rt-sheet)}
+.rt-tape>.iso-fill{fill:var(--rt-tape);fill-opacity:.92}
+.rt-stage{position:relative;cursor:crosshair;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:pan-y;outline:none}
+.rt-stage:focus-visible{outline:1px solid var(--cutaway-muted);outline-offset:4px}
+.rt-stage>svg,.rt-stage>canvas{display:block;width:100%;height:auto}
+.rt-stage>.rt-layer{position:absolute;inset:0;height:100%!important;pointer-events:none}
+.rt-said{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.rt-stage[data-gl] .rt-fallback{display:none}
+.iso:not([data-theme="light"]) .rt-paper-gl{mix-blend-mode:screen}
+.rt-water>.iso-fill{fill:var(--cutaway-shade-2);opacity:calc(.7 * (1 - var(--rt-lamp)))}
+.iso[data-theme="light"] .rt-stage[data-gl] .rt-water,.rt[data-theme="light"] .rt-stage[data-gl] .rt-water{display:none}
+.rt-glass>.iso-fill{fill-opacity:.22}
+.rt-glass>.iso-shade,.rt-glass>.iso-top{fill-opacity:.3}
+.rt-beach .iso-shade{fill-opacity:.96}
+.rt-lever{stroke-width:1.5px}
+@media (max-width:560px){
+  .rt .iso-plate{padding-left:6px;padding-right:6px}
+  .rt-stage{width:118%;margin-left:-9%;margin-right:-9%}
+  .rt-stage:focus-visible{outline:none}
+  .rt .iso-plate:has(.rt-stage:focus-visible){outline:1px solid var(--cutaway-muted);outline-offset:-3px}
+}

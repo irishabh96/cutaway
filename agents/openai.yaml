@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cutaway"
+  short_description: "Explore systems through interactive isometric cutaways"
+  default_prompt: "Use $cutaway to build an interactive cutaway of this system."
